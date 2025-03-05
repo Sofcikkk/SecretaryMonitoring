@@ -1,4 +1,4 @@
-package org.example.backend.DataBaseConnection;
+package org.example.backend.Entity;
 
 import jakarta.persistence.*;
 

@@ -1,6 +1,7 @@
-package org.example.backend.DataBaseConnection;
+package org.example.backend.Entity;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 public class Schedules {
@@ -20,7 +21,7 @@ public class Schedules {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private  Status status;
+    private Status status;
 
     private String notes;
 
