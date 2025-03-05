@@ -1,8 +1,8 @@
-package org.example.backend.DataBaseConnection;
+package org.example.backend.Entity;
 
 public enum Role {
-    Admin,
-    Director,
-    Manager,
-    Employee
+    admin,
+    director,
+    manager,
+    employee
 }
