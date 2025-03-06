@@ -4,7 +4,7 @@ import UsersService from "../Services/users.service";
 export default class UsersList extends Component {
     constructor(props) {
         super(props);
-        this.retrieveTutorials = this.retrieveTutorials.bind(this);
+        this.retrieveUsers = this.retrieveUsers.bind(this);
         this.state = {
             users: [],
         }
@@ -19,7 +19,6 @@ export default class UsersList extends Component {
                 this.setState({
                     users: response.data
                 });
-                console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -27,7 +26,15 @@ export default class UsersList extends Component {
     }
     render() {
         return (
-            <div>abcc</div>
+            <div>
+                <h2>Lista użytkowników</h2>
+                <ul>
+                    {this.state.users.map((user, index) => (
+                        <li key={index}>{user.firstName} {user.lastName} {user.password}</li>
+                    ))}
+                </ul>
+            </div>
         )
     }
+
 }
