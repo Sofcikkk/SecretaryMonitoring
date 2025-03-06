@@ -13,32 +13,23 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api")
 public class UserController {
-    private final UserService userService;
-
+    private final UserService userService; // pole userService ktore przechowyuje referencje obiektu klasy UserService (jeszcze nie zawiera obiektu)
+    //nie przechowuje w sobie metod tylko adres w pamieci przez co UserController moze korzystac z metod napisanych w UserService
     public UserController(UserService userService) {
         this.userService = userService;
+        //referencja  pozwala na korzystanie z metod i pol obiektu
     }
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
+        System.out.println("asdqwe");
         return userService.getAllUsers();
 
     }
-//    @GetMapping("/users/{id}")
-//    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-//        Optional<User> user = userService.getUserById(id);
-//        return user.map(ResponseEntity::ok)
-//                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-//    }
 
-//    @PostMapping("/users")
-//    public User createUser(@RequestBody User user) {
-//        return userService.createUser(user);
-//
-//    }
+    @PostMapping("/users")
+    public User createUser(@RequestBody User user) {
+        return userService.createUser(user);
 
-    @DeleteMapping("/users/{id}")
-    public void deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
     }
 }

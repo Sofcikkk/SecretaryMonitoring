@@ -5,7 +5,6 @@ import org.example.backend.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,15 +18,10 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUserById(Long id) {
-        return userRepository.findById(id);
-    }
-
     public User createUser(User user) {
         return userRepository.save(user);
     }
 
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
-    }
 }
+
+//User UserRepository userRepository daje nam dostep do bazy danych
