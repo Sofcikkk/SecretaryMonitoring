@@ -1,10 +1,11 @@
 package org.example.backend.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "users")
-
+@Data
 public class User {
     //tworzenie wzorca Bazy Danych w kodzie
     @Id

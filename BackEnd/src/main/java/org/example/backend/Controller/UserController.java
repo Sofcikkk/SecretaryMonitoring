@@ -24,18 +24,18 @@ public class UserController {
         return userService.getAllUsers();
 
     }
-    @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        Optional<User> user = userService.getUserById(id);
-        return user.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-    }
+//    @GetMapping("/users/{id}")
+//    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+//        Optional<User> user = userService.getUserById(id);
+//        return user.map(ResponseEntity::ok)
+//                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+//    }
 
-    @PostMapping("/users")
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
-
-    }
+//    @PostMapping("/users")
+//    public User createUser(@RequestBody User user) {
+//        return userService.createUser(user);
+//
+//    }
 
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable Long id) {

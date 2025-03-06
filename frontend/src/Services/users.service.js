@@ -2,7 +2,10 @@ import http from "../http-common";
 
 class UsersDataService{
     getAll() {
+        let a = http.get("/users")
+        console.log(a)
         return http.get("/users");
     }
 }
-export default new UsersDataService()
+const usersDataService = new UsersDataService();
+export default usersDataService;

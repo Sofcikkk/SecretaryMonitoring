@@ -10,14 +10,14 @@ export default class UsersList extends Component {
         }
     }
     componentDidMount() {
-        this.retrieveTutorials();
+        this.retrieveUsers();
     }
 
-    retriveUsers(){
+    retrieveUsers(){
         UsersService.getAll()
             .then(response => {
                 this.setState({
-                    tutorials: response.data
+                    users: response.data
                 });
                 console.log(response.data);
             })
@@ -27,7 +27,7 @@ export default class UsersList extends Component {
     }
     render() {
         return (
-            <div></div>
+            <div>abcc</div>
         )
     }
 }
