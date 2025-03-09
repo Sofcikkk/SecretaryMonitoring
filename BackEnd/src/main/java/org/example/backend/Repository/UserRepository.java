@@ -10,5 +10,3 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 }
-//interface odpowiada nam za laczenie z baza danych  i daje nam gotowe metody np findAll() spring
-//sam tworzy implementacje tych metod

@@ -6,22 +6,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class UserService {
-    private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public User createUser(User user) {
-        return userRepository.save(user);
-    }
+public interface UserService {
+    User save(User user);
+    List<User> findAll();
+    User updateById(Long id, User user);
+    User findById(Long id);
+    void deleteById(Long id);
 
 }
 
-//User UserRepository userRepository daje nam dostep do bazy danych

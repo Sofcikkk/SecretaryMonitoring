@@ -1,33 +1,20 @@
 package org.example.backend.Entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "users")
-@Data
+@Setter
+@Getter
 public class User {
-    //tworzenie wzorca Bazy Danych w kodzie
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //wartosc pola generowana automatycznie
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
     private String firstName;
-
-    @Column(nullable = false)
     private String lastName;
-
-    @Column(nullable = false)
     private String password;
-
-    @Column(nullable = false, unique = true)
     private String email;
-
-    @Enumerated(EnumType.STRING) // hibernate zapisuje wartosc enum jako warosc string
-    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Role role;
-
-    //hibernate mapuje obiekty z javy do relacji w bazie danych
-
 }
