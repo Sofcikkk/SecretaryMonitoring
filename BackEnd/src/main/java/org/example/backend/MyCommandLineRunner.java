@@ -16,7 +16,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User user = new User();
-        user.setFirstName("szymon");
+        user.setFirstName("szymonpizda");
         user.setLastName("dulewski");
         user.setEmail("szymon@gmail.com");
         user.setPassword("password");
