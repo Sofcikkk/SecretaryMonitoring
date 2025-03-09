@@ -1,10 +1,9 @@
 package org.example.backend.Service;
 
 import org.example.backend.Entity.User;
-import org.example.backend.Repository.UserRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     User save(User user);
@@ -12,6 +11,6 @@ public interface UserService {
     User updateById(Long id, User user);
     User findById(Long id);
     void deleteById(Long id);
-
+    Optional<User> authenticateUser(String email, String password);
 }
 

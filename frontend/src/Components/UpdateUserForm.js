@@ -15,6 +15,7 @@ export default function UpdateUserForm() {
         try {
             const response = await updateUserById(id, user);
             navigate(`/UsersList`);
+            return response
         } catch (error) {
             console.error('Error', error);
         }
@@ -33,7 +34,7 @@ export default function UpdateUserForm() {
         }
 
         fetchData();
-    }, []);
+    });
 
     const handleChange = (event) => {
         const { id, value } = event.target;
@@ -60,7 +61,7 @@ export default function UpdateUserForm() {
                 </div>
                 <div className="mb-3 mt-5">
                     <label htmlFor="password" className="form-label">Haslo</label>
-                    <input onChange={handleChange} value={user.password || ""} type="text" className="form-control" id="password" />
+                    <input onChange={handleChange} type="text" className="form-control" id="password" />
                 </div>
                 <div className="mb-3 mt-5">
                     <label htmlFor="role" className="form-label">Rola</label>

@@ -1,20 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {NavLink} from "react-router-dom";
+import { loginAPICall } from "../Services/login.service";
 
 const LoginForm = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const { login } = useAuth(); // Use auth context
+
+    async function handleLoginForm(e) {
+        e.preventDefault();
+        try {
+            const response = await loginAPICall(username, password);
+            console.log(response.data);
+
+            login(); // Updates context and localStorage
+            localStorage.setItem("user", JSON.stringify(response.data));
+
+            navigate("/");
+        } catch (error) {
+            console.error("Login failed", error);
+        }
+    }
+
     return (
-        <div className="d-flex justify-content-center align-items-center  bg-gradient">
+        <div className="d-flex justify-content-center align-items-center bg-gradient">
             <div className="card p-4 shadow-lg" style={{ width: "350px" }}>
-                {/* Title */}
                 <h2 className="text-center mb-4">Login</h2>
 
-                {/* Form */}
                 <div className="mb-3">
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Username / Email"
+                        placeholder="Email"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                     />
                 </div>
 
@@ -23,27 +45,12 @@ const LoginForm = () => {
                         type="password"
                         className="form-control"
                         placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
 
-                {/* Forgot Password */}
-                <div className="text-end">
-                    <a href="#" className="text-decoration-none">Forgot Password?</a>
-                </div>
-
-                {/* Login Button */}
-                <button className="btn btn-danger w-100 mt-3">Login</button>
-
-                {/* Register Link */}
-                <p className="text-center mt-3">
-                    Don’t have an account?{" "}
-                    <NavLink
-                        to="/register"
-                        className="text-danger fw-bold text-decoration-none"
-                    >
-                        Register
-                    </NavLink>
-                </p>
+                <button className="btn btn-danger w-100 mt-3" onClick={handleLoginForm}>Login</button>
             </div>
         </div>
     );
