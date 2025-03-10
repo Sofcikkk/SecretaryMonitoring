@@ -4,10 +4,12 @@ import org.example.backend.Entity.User;
 import org.example.backend.Repository.UserRepository;
 import org.example.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -19,7 +21,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     @Override
@@ -31,6 +33,7 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword())); // Ensure password is hashed
         return userRepository.save(user);
+
     }
 
     @Override
@@ -45,7 +48,7 @@ public class UserServiceImpl implements UserService {
             managedUser.setFirstName(user.getFirstName());
             managedUser.setLastName(user.getLastName());
             managedUser.setEmail(user.getEmail());
-            managedUser.setPassword(passwordEncoder.encode(user.getPassword())); // Hash updated password
+            managedUser.setPassword(user.getPassword()); // Hash updated password
             managedUser.setRole(user.getRole());
             return this.save(managedUser);
         }
@@ -57,11 +60,29 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    @Override
     public Optional<User> authenticateUser(String email, String password) {
+        System.out.println("Attempting to authenticate user with email: " + email);
+
         Optional<User> userOptional = userRepository.findByEmail(email);
-        if (userOptional.isPresent() && passwordEncoder.matches(password, userOptional.get().getPassword())) {
-            return userOptional;
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            System.out.println("User found: {}"+ user.getEmail());
+
+            boolean passwordMatches = passwordEncoder.matches(password, user.getPassword());
+            System.out.println("passwords:"+ password + " "+ user.getPassword() + " "+ passwordMatches);
+
+            if (passwordMatches) {
+                System.out.println("Authentication successful for user: {}"+ email);
+                return Optional.of(user);
+            } else {
+                System.out.println("Authentication failed for user: {} - Incorrect password"+ email);
+            }
+        } else {
+            System.out.println("Authentication failed - No user found with email: {}"+ email);
         }
+
         return Optional.empty();
     }
+
 }

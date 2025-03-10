@@ -1,10 +1,11 @@
 import {NavLink, useNavigate} from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import img from "../imgs/logo_teb_header.642e49.png";
-
+import {employeePlus, menagerPlus, directorAdmin} from "../roles"
 export default function NavBar() {
-    const { isAuthenticated, logout } = useAuth();
-
+    const { isAuthenticated, logout} = useAuth();
+    const userName = localStorage.getItem("userName");
+    const userRole = localStorage.getItem("userRole")
     const navigate = useNavigate();
     const handleLogout = () => {
         logout();
@@ -20,15 +21,17 @@ export default function NavBar() {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
+                        {menagerPlus.includes(userRole) && (
                         <li className="nav-item">
                             <NavLink
                                 to="/UsersList"
                                 className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
                                 aria-current="page"
                             >
-                                Show Users List
+                                Show Users List naprawic przy zmianie czegokolwiek zmienia haslo potem go nie akceptuje
                             </NavLink>
-                        </li>
+                        </li>)}
+                        {menagerPlus.includes(userRole) && (
                         <li className="nav-item">
                             <NavLink
                                 to="/newUser"
@@ -36,14 +39,15 @@ export default function NavBar() {
                             >
                                 Add User
                             </NavLink>
-                        </li>
+                        </li>)}
 
                         {/* Show Login if NOT authenticated, Logout if authenticated */}
                         <li className="nav-item ms-auto">
                             {isAuthenticated ? (
-                                <button onClick={handleLogout} className="btn btn-link nav-link text-danger">
-                                    Logout
+                                <button onClick={handleLogout} className="btn btn-outline-danger d-flex align-items-center gap-2 px-3 py-2">
+                                    {userName} Logout
                                 </button>
+
                             ) : (
                                 <NavLink
                                     to="/login"

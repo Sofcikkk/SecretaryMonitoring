@@ -3,6 +3,8 @@ package org.example.backend.Controller;
 import org.example.backend.Entity.User;
 import org.example.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,20 +18,19 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
-    @GetMapping
-    public List<User> findAll() {
-        return userService.findAll();
-    }
     @PostMapping("/login")
-    public Map<String, Object> login(@RequestBody Map<String, String> request) {
-        Optional<User> user = userService.authenticateUser(request.get("email"), request.get("password"));
-        Map<String, Object> response = new HashMap<>();
+    public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
+        String email = credentials.get("email");
+        String password = credentials.get("password");
+
+        System.out.println("Received Login Request -> Email: " + email + ", Password: " + password);
+
+        Optional<User> user = userService.authenticateUser(email, password);
         if (user.isPresent()) {
-            response.put("message", "Login successful");
-            response.put("user", user.get());
+            return ResponseEntity.ok(user.get());
         } else {
-            response.put("message", "Invalid credentials");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
         }
-        return response;
     }
+
 }

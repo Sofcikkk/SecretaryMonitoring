@@ -20,7 +20,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
         user.setLastName("dulewski");
         user.setEmail("szymon@gmail.com");
         user.setPassword("password");
-        user.setRole(Role.admin);
+        user.setRole(Role.director);
         userService.save(user);
     }
 }

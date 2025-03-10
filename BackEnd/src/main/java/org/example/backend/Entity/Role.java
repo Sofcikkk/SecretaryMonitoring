@@ -1,8 +1,8 @@
 package org.example.backend.Entity;
 
 public enum Role {
-    admin,
     director,
+    admin,
     manager,
     employee
 }

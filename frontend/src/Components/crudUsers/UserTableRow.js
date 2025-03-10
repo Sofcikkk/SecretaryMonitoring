@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import {useContext} from 'react';
-import {deleteUserById} from "../Services/users.service";
-import {UserContext} from "../context/UserContext";
+import {deleteUserById} from "../../Services/users.service";
+import {UserContext} from "../../context/UserContext";
 
 export default function UserTableRow ({id, firstName, lastName, password, email, role}) {
 

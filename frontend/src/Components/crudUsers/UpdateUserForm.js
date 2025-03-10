@@ -1,7 +1,7 @@
-import React, {useContext, useEffect} from "react";
-import {getUserById, updateUserById} from "../Services/users.service";
+import React, {useContext, useEffect, useState} from "react";
+import {getUserById, updateUserById} from "../../Services/users.service";
 import {useNavigate, useParams} from 'react-router-dom';
-import {UserContext} from "../context/UserContext";
+import {UserContext} from "../../context/UserContext";
 
 export default function UpdateUserForm() {
 
@@ -13,36 +13,44 @@ export default function UpdateUserForm() {
         target.preventDefault();
 
         try {
-            const response = await updateUserById(id, user);
+            const updatedUser = { ...user };
+            console.log(updatedUser)
+            const response = await updateUserById(id, updatedUser);
             navigate(`/UsersList`);
-            return response
+            return response;
         } catch (error) {
             console.error('Error', error);
         }
     }
 
+
     useEffect(() => {
 
         async function fetchData() {
             try {
-                const user = await getUserById(id);
+                const fetchedUser = await getUserById(id);
                 console.log(user)
-                updateUser(user);
+                updateUser(fetchedUser);
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
         }
 
         fetchData();
-    });
+    },[]);
 
     const handleChange = (event) => {
         const { id, value } = event.target;
-        updateUser(prevUser => ({
-            ...prevUser,
-            [id]: value,
-        }));
+
+        updateUser(prevUser => {
+            return {
+                ...prevUser,
+                [id]: value,
+            };
+        });
     };
+
+
 
     return(
         <div>

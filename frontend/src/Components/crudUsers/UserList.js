@@ -1,12 +1,21 @@
 import React, {useContext, useEffect} from 'react';
-import {NavLink} from "react-router-dom";
 import UserTableRow from "./UserTableRow";
-import {getUsers} from "../Services/users.service";
-import {UserContext} from "../context/UserContext";
+import {getUsers} from "../../Services/users.service";
+import {UserContext} from "../../context/UserContext";
+import {employeePlus, menagerPlus, directorAdmin} from "../../roles"
+import {useNavigate} from "react-router-dom";
 
 export default function UserList() {
 
     const { users, updateUsers } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const storedRole = localStorage.getItem("userRole");
+        if (!menagerPlus.includes(storedRole)) {
+            navigate(`/`);
+        }
+    }, []);
 
     useEffect(() => {
         async function fetchData() {
@@ -19,7 +28,8 @@ export default function UserList() {
         }
 
         fetchData();
-    }, []);
+    },[]);
+
 
     return(
         <div>

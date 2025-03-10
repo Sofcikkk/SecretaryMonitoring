@@ -1,13 +1,12 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { loginAPICall } from "../Services/login.service";
 
-// Create AuthContext
 const AuthContext = createContext();
 
 // Provider Component
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // Load authentication state from localStorage when the app starts
     useEffect(() => {
         const storedAuth = localStorage.getItem("isAuthenticated");
         if (storedAuth === "true") {
@@ -15,14 +14,34 @@ export const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    const login = () => {
-        setIsAuthenticated(true);
-        localStorage.setItem("isAuthenticated", "true"); // Store auth state
+    const login = async (username, password) => {
+
+        if (!username || !password) {
+            console.error("❌ Login Error: Missing username or password");
+            return; // Prevents second call with undefined values
+        }
+
+        try {
+            const response = await loginAPICall(username, password);
+
+            if (response.data) {
+                const user = response.data;
+                setIsAuthenticated(true);
+                localStorage.setItem("isAuthenticated", "true");
+                localStorage.setItem("userRole", user.role);
+                localStorage.setItem("userName", user.firstName);
+            }
+        } catch (error) {
+            console.error("❌ Login failed:", error.response?.data || error);
+        }
     };
+
 
     const logout = () => {
         setIsAuthenticated(false);
-        localStorage.removeItem("isAuthenticated"); // Clear auth state
+        localStorage.removeItem("isAuthenticated");
+        localStorage.removeItem("userRole");
+        localStorage.removeItem("userName");
     };
 
     return (

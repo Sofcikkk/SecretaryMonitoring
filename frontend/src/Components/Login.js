@@ -1,29 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { loginAPICall } from "../Services/login.service";
 
 const LoginForm = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [formData, setFormData] = useState({
+        username: '',
+        password: ''
+    });
+
     const navigate = useNavigate();
-    const { login } = useAuth(); // Use auth context
+    const { isAuthenticated, login } = useAuth(); // Use auth context
+
+    // Redirect when authentication state updates
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate("/");
+        }
+    }, [isAuthenticated, navigate]);
 
     async function handleLoginForm(e) {
         e.preventDefault();
         try {
-            const response = await loginAPICall(username, password);
-            console.log(response.data);
+            const response = await loginAPICall(formData.username, formData.password);
 
-            login(); // Updates context and localStorage
+            console.log("Login successful, response:", response.data);
+
+            // Update authentication state
+            login(formData.username, formData.password);
+
+            // Store user data in local storage
             localStorage.setItem("user", JSON.stringify(response.data));
 
-            navigate("/");
         } catch (error) {
             console.error("Login failed", error);
         }
     }
+
+    // Handle input changes
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
     return (
         <div className="d-flex justify-content-center align-items-center bg-gradient">
@@ -33,20 +55,22 @@ const LoginForm = () => {
                 <div className="mb-3">
                     <input
                         type="text"
+                        name="username"
                         className="form-control"
                         placeholder="Email"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={formData.username}
+                        onChange={handleChange}
                     />
                 </div>
 
                 <div className="mb-3">
                     <input
                         type="password"
+                        name="password"
                         className="form-control"
                         placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        value={formData.password}
+                        onChange={handleChange}
                     />
                 </div>
 

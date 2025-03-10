@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useRef} from "react";
-import {createUser, getUserById, updateUserById} from "../Services/users.service";
-import {useNavigate, useParams} from 'react-router-dom';
-import {UserContext} from "../context/UserContext";
+import React, {useContext, useRef} from "react";
+import {createUser} from "../../Services/users.service";
+import {useNavigate} from 'react-router-dom';
+import {UserContext} from "../../context/UserContext";
 
 export default function NewUser() {
 
