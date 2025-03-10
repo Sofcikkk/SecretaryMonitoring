@@ -22,7 +22,6 @@ export default function UserTableRow ({id, firstName, lastName, password, email,
             <th scope="row">{id}</th>
             <td>{firstName}</td>
             <td>{lastName}</td>
-            <td>{password}</td>
             <td>{email}</td>
             <td>{role}</td>
             <td>

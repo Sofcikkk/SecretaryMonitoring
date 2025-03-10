@@ -2,8 +2,8 @@ import React, {useContext, useEffect} from 'react';
 import UserTableRow from "./UserTableRow";
 import {getUsers} from "../../Services/users.service";
 import {UserContext} from "../../context/UserContext";
-import {employeePlus, menagerPlus, directorAdmin} from "../../roles"
-import {useNavigate} from "react-router-dom";
+import {menagerPlus} from "../../roles"
+import {NavLink, useNavigate} from "react-router-dom";
 
 export default function UserList() {
 
@@ -32,28 +32,47 @@ export default function UserList() {
 
 
     return(
-        <div>
-            <table className="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">LastName</th>
-                    <th scope="col">Password</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {users.map((user) => (
-                    user.id ? <UserTableRow key={user.id} {...user} /> : null
-                ))}
-                </tbody>
+        <div className="container mt-4">
+            {/* Add User Button */}
+            <div className="d-flex justify-content-between align-items-center mb-3">
+                <h2 className="text-primary">User Management</h2>
+                <NavLink to="/newUser" className="btn btn-primary">
+                    <i className="bi bi-person-plus-fill me-2"></i> Add User
+                </NavLink>
+            </div>
 
-            </table>
-
+            {/* Table inside a Card */}
+            <div className="card shadow-sm">
+                <div className="card-body">
+                    <table className="table table-striped table-hover">
+                        <thead className="table-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {users.length > 0 ? (
+                            users.map((user) =>
+                                user.id ? <UserTableRow key={user.id} {...user} /> : null
+                            )
+                        ) : (
+                            <tr>
+                                <td colSpan="6" className="text-center text-muted">
+                                    No users found.
+                                </td>
+                            </tr>
+                        )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
 
     );
 

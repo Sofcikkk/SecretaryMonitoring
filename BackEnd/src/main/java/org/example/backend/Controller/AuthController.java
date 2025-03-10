@@ -23,7 +23,6 @@ public class AuthController {
         String email = credentials.get("email");
         String password = credentials.get("password");
 
-        System.out.println("Received Login Request -> Email: " + email + ", Password: " + password);
 
         Optional<User> user = userService.authenticateUser(email, password);
         if (user.isPresent()) {

@@ -62,18 +62,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> authenticateUser(String email, String password) {
-        System.out.println("Attempting to authenticate user with email: " + email);
 
         Optional<User> userOptional = userRepository.findByEmail(email);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            System.out.println("User found: {}"+ user.getEmail());
 
             boolean passwordMatches = passwordEncoder.matches(password, user.getPassword());
-            System.out.println("passwords:"+ password + " "+ user.getPassword() + " "+ passwordMatches);
 
             if (passwordMatches) {
-                System.out.println("Authentication successful for user: {}"+ email);
                 return Optional.of(user);
             } else {
                 System.out.println("Authentication failed for user: {} - Incorrect password"+ email);

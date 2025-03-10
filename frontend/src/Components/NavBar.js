@@ -1,7 +1,6 @@
 import {NavLink, useNavigate} from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import img from "../imgs/logo_teb_header.642e49.png";
-import {employeePlus, menagerPlus, directorAdmin} from "../roles"
 export default function NavBar() {
     const { isAuthenticated, logout} = useAuth();
     const userName = localStorage.getItem("userName");
@@ -20,44 +19,161 @@ export default function NavBar() {
                 </NavLink>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
-                        {menagerPlus.includes(userRole) && (
-                        <li className="nav-item">
-                            <NavLink
-                                to="/UsersList"
-                                className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-                                aria-current="page"
-                            >
-                                Show Users List naprawic przy zmianie czegokolwiek zmienia haslo potem go nie akceptuje
-                            </NavLink>
-                        </li>)}
-                        {menagerPlus.includes(userRole) && (
-                        <li className="nav-item">
-                            <NavLink
-                                to="/newUser"
-                                className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
-                            >
-                                Add User
-                            </NavLink>
-                        </li>)}
 
-                        {/* Show Login if NOT authenticated, Logout if authenticated */}
-                        <li className="nav-item ms-auto">
-                            {isAuthenticated ? (
-                                <button onClick={handleLogout} className="btn btn-outline-danger d-flex align-items-center gap-2 px-3 py-2">
-                                    {userName} Logout
-                                </button>
-
-                            ) : (
+                    {(userRole === "employee") && (
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
+                            <li className="nav-item ms-auto">
                                 <NavLink
-                                    to="/login"
+                                    to="/workSchedile"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
                                 >
-                                    Logowanie
+                                    Grafik
                                 </NavLink>
-                            )}
-                        </li>
-                    </ul>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/vacationForm"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Wniosek o Urlop
+                                </NavLink>
+                            </li>
+                        </ul>
+                    )}
+
+                    {(userRole === "manager") && (
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/workSchedile"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Grafik
+                                </NavLink>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/vacationForm"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Wniosek o Urlop
+                                </NavLink>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/tasksList"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Zarzadzanie Zadaniami
+                                </NavLink>
+                            </li>
+                        </ul>
+                    )}
+
+                    {(userRole === "admin") && (
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/workSchedile"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Grafik
+                                </NavLink>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/vacationForm"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Wniosek o Urlop
+                                </NavLink>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/tasksList"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Zarzadzanie Zadaniami
+                                </NavLink>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/usersList"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Zarzadzanie Kontami
+                                </NavLink>
+                            </li>
+                        </ul>
+                    )}
+
+                    {(userRole === "director") && (
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/workSchedile"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Grafik
+                                </NavLink>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/vacationForm"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Wniosek o Urlop
+                                </NavLink>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/tasksList"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Zarzadzanie Zadaniami
+                                </NavLink>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/usersList"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Zarzadzanie Kontami
+                                </NavLink>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/workTime"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Czas Pracy i Raporty
+                                </NavLink>
+                            </li>
+                            <li className="nav-item ms-auto">
+                                <NavLink
+                                    to="/dataAnalysis"
+                                    className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                                >
+                                    Analiza Danych
+                                </NavLink>
+                            </li>
+                        </ul>
+                    )}
+                    <div className="ms-auto">
+                        {isAuthenticated ? (
+                            <button onClick={handleLogout} className="btn btn-outline-danger d-flex align-items-center gap-2 px-3 py-2">
+                                {userName} Logout
+                            </button>
+
+                        ) : (
+                            <NavLink
+                                to="/login"
+                                className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+                            >
+                                Logowanie
+                            </NavLink>
+                        )}
+                    </div>
                 </div>
             </div>
         </nav>

@@ -11,6 +11,11 @@ import NewUser from "./Components/crudUsers/NewUser";
 import LoginForm from "./Components/Login";
 import ProtectedRoute from "./ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
+import TasksList from "./Components/TasksList";
+import WorkTime from "./Components/WorkTime";
+import DataAnalysis from "./Components/DataAnalysis";
+import WorkSchedule from "./Components/WorkSchedule";
+import VacationForm from "./Components/VacationForm";
 
 function App() {
     return (
@@ -34,9 +39,14 @@ function App() {
                                     </ProtectedRoute>
                                 }
                             >
-                                <Route path="UsersList" element={<UserList />} />
+                                <Route path="usersList" element={<UserList />} />
                                 <Route path=":id/edit" element={<UpdateUserForm />} />
                                 <Route path="newUser" element={<NewUser />} />
+                                <Route path="tasksList" element={<TasksList/>} />
+                                <Route path="workTime" element={<WorkTime/>} />
+                                <Route path="dataAnalysis" element={<DataAnalysis/>} />
+                                <Route path="workSchedule" element={<WorkSchedule/>} />
+                                <Route path="vacationForm" element={<VacationForm/>} />
                             </Route>
                         </Routes>
                     </div>
