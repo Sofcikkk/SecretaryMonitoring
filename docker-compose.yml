@@ -13,7 +13,7 @@ services:
       interval: 10s
       retries: 5
       start_period: 20s
-      timeout: 5s
+      timeout: 50s
   spring-boot-app:
     build:
       context: ./backend
