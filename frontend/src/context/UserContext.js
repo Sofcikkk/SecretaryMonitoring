@@ -22,9 +22,17 @@ export const UserListProvider = ({ children }) => {
         const newUser = users.filter((user) => user.id !== id);
         setUsers(newUser);
     }
-
     return (
-        <UserContext.Provider value={{ users, user, updateUsers, updateUser, removeUserById, addUser }}>
+        <UserContext.Provider
+            value={{
+                users,
+                user,
+                updateUsers,
+                updateUser,
+                removeUserById,
+                addUser
+            }}
+        >
             {children}
         </UserContext.Provider>
     );

@@ -1,8 +1,8 @@
 import React, {useContext, useEffect} from 'react';
 import UserTableRow from "./UserTableRow";
-import {getUsers} from "../../Services/users.service";
+import {getUsers, getUserScheduleById} from "../../Services/users.service";
 import {UserContext} from "../../context/UserContext";
-import {menagerPlus} from "../../roles"
+import {directorAdmin, menagerPlus} from "../../roles"
 import {NavLink, useNavigate} from "react-router-dom";
 
 export default function UserList() {
@@ -12,7 +12,7 @@ export default function UserList() {
 
     useEffect(() => {
         const storedRole = localStorage.getItem("userRole");
-        if (!menagerPlus.includes(storedRole)) {
+        if (!directorAdmin.includes(storedRole)) {
             navigate(`/`);
         }
     }, []);
@@ -29,7 +29,7 @@ export default function UserList() {
 
         fetchData();
     },[]);
-
+    console.log(getUserScheduleById(1))
 
     return(
         <div className="container mt-4">

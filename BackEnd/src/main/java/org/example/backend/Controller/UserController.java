@@ -1,5 +1,6 @@
 package org.example.backend.Controller;
 
+import org.example.backend.Entity.Schedules;
 import org.example.backend.Entity.User;
 import org.example.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) {
         userService.deleteById(id);
+    }
+
+    @GetMapping("/{id}/schedules")
+    public List<Schedules> getUserSchedules(@PathVariable Long id) {
+        return userService.getUserSchedules(id);
     }
 
 }

@@ -48,3 +48,11 @@ export const deleteUserById = async (id) => {
         throw error;
     }
 }
+export const getUserScheduleById = async (id) => {
+    try{
+        const response = await  axios.get(`${apiUrl}/${id}/schedules`)
+        return response.data
+    }catch (error){
+        throw error;
+    }
+}

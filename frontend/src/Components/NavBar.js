@@ -22,15 +22,15 @@ export default function NavBar() {
 
                     {(userRole === "employee") && (
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
-                                    to="/workSchedile"
+                                    to="/workSchedule"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
                                 >
                                     Grafik
                                 </NavLink>
                             </li>
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
                                     to="/vacationForm"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
@@ -43,15 +43,15 @@ export default function NavBar() {
 
                     {(userRole === "manager") && (
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
-                                    to="/workSchedile"
+                                    to="/workSchedule"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
                                 >
                                     Grafik
                                 </NavLink>
                             </li>
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
                                     to="/vacationForm"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
@@ -59,7 +59,7 @@ export default function NavBar() {
                                     Wniosek o Urlop
                                 </NavLink>
                             </li>
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
                                     to="/tasksList"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
@@ -72,15 +72,15 @@ export default function NavBar() {
 
                     {(userRole === "admin") && (
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
-                                    to="/workSchedile"
+                                    to="/workSchedule"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
                                 >
                                     Grafik
                                 </NavLink>
                             </li>
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
                                     to="/vacationForm"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
@@ -88,7 +88,7 @@ export default function NavBar() {
                                     Wniosek o Urlop
                                 </NavLink>
                             </li>
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
                                     to="/tasksList"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
@@ -96,7 +96,7 @@ export default function NavBar() {
                                     Zarzadzanie Zadaniami
                                 </NavLink>
                             </li>
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
                                     to="/usersList"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
@@ -109,15 +109,15 @@ export default function NavBar() {
 
                     {(userRole === "director") && (
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
-                                    to="/workSchedile"
+                                    to="/workSchedule"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
                                 >
                                     Grafik
                                 </NavLink>
                             </li>
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
                                     to="/vacationForm"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
@@ -125,7 +125,7 @@ export default function NavBar() {
                                     Wniosek o Urlop
                                 </NavLink>
                             </li>
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
                                     to="/tasksList"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
@@ -133,7 +133,7 @@ export default function NavBar() {
                                     Zarzadzanie Zadaniami
                                 </NavLink>
                             </li>
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
                                     to="/usersList"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
@@ -141,7 +141,7 @@ export default function NavBar() {
                                     Zarzadzanie Kontami
                                 </NavLink>
                             </li>
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
                                     to="/workTime"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
@@ -149,7 +149,7 @@ export default function NavBar() {
                                     Czas Pracy i Raporty
                                 </NavLink>
                             </li>
-                            <li className="nav-item ms-auto">
+                            <li className="nav-item ">
                                 <NavLink
                                     to="/dataAnalysis"
                                     className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}

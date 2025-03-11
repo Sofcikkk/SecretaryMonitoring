@@ -1,5 +1,6 @@
 package org.example.backend.Service.impl;
 
+import org.example.backend.Entity.Schedules;
 import org.example.backend.Entity.User;
 import org.example.backend.Repository.UserRepository;
 import org.example.backend.Service.UserService;
@@ -9,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -79,6 +79,12 @@ public class UserServiceImpl implements UserService {
         }
 
         return Optional.empty();
+    }
+    @Override
+    public List<Schedules> getUserSchedules(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getSchedules();
     }
 
 }

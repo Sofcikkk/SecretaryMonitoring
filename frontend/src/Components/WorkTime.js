@@ -1,6 +1,5 @@
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {menagerPlus} from "../roles";
 
 export default function WorkTime() {
 
@@ -8,7 +7,7 @@ export default function WorkTime() {
 
     useEffect(() => {
         const storedRole = localStorage.getItem("userRole");
-        if (!menagerPlus.includes(storedRole)) {
+        if (storedRole !== "director") {
             navigate(`/`);
         }
     }, []);

@@ -12,7 +12,3 @@ export const loginAPICall = async (email, password) => {
 };
 
 
-export const logoutAPICall = () => {
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("user");
-};
