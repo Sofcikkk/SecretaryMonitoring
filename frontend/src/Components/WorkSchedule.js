@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {getUsers, getUserScheduleById} from "../Services/users.service";
+import { getUsers, getUserScheduleById } from "../Services/users.service";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function WorkSchedule() {
@@ -24,7 +24,12 @@ export default function WorkSchedule() {
         }
     }, [selectedUser, users]);
 
-    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const days = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek"];
+    const timeSlots = [
+        "7:10-7:55", "8:00-8:45", "8:55-9:40", "9:50-10:35", "10:45-11:30",
+        "11:40-12:25", "12:40-13:25", "13:35-14:20", "14:30-15:15", "15:25-16:10",
+        "16:20-17:05", "17:15-18:00"
+    ];
 
     return (
         <div className="container mt-4">
@@ -52,11 +57,16 @@ export default function WorkSchedule() {
                         ))}
                     </tr>
                     </thead>
-
                     {console.log(schedule)}
-                    {/*chudy zrob wygladowo grafik*/}
                     <tbody>
-
+                    {timeSlots.map((time, index) => (
+                        <tr key={index}>
+                            <td>{time}</td>
+                            {days.map((_, dayIndex) => (
+                                <td key={dayIndex}>{schedule?.[index]?.[dayIndex] || ""}</td>
+                            ))}
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>
