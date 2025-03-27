@@ -2,6 +2,7 @@ package org.example.backend.Service;
 
 import org.example.backend.Entity.Schedules;
 import org.example.backend.Entity.User;
+import org.example.backend.Entity.VacationReq;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,5 +15,6 @@ public interface UserService {
     void deleteById(Long id);
     Optional<User> authenticateUser(String email, String password);
     List<Schedules> getUserSchedules(Long id);
+    List<VacationReq> getUserVacationReqs(Long id);
 }
 

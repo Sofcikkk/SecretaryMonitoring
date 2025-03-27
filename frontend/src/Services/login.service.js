@@ -5,6 +5,7 @@ const apiUrl = `${baseURL}/api/auth`;
 export const loginAPICall = async (email, password) => {
     try {
         const response = await axios.post(`${apiUrl}/login`, { email, password });
+        console.log(response.data)
         return response;
     } catch (error) {
         throw error;

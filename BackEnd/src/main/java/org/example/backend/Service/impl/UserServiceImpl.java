@@ -2,6 +2,7 @@ package org.example.backend.Service.impl;
 
 import org.example.backend.Entity.Schedules;
 import org.example.backend.Entity.User;
+import org.example.backend.Entity.VacationReq;
 import org.example.backend.Repository.UserRepository;
 import org.example.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,12 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
         return user.getSchedules();
+    }
+    @Override
+    public List<VacationReq> getUserVacationReqs(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        return user.getVacations();
     }
 
 }

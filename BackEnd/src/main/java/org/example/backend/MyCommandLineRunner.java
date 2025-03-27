@@ -1,15 +1,14 @@
 package org.example.backend;
 
-import org.example.backend.Entity.Days;
-import org.example.backend.Entity.Role;
-import org.example.backend.Entity.Schedules;
-import org.example.backend.Entity.User;
+import org.example.backend.Entity.*;
 import org.example.backend.Service.SchedulesService;
 import org.example.backend.Service.UserService;
+import org.example.backend.Service.VacationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -20,6 +19,8 @@ public class MyCommandLineRunner implements CommandLineRunner {
     private UserService userService;
     @Autowired
     private SchedulesService schedulesService;
+    @Autowired
+    private VacationService vacationService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -35,16 +36,21 @@ public class MyCommandLineRunner implements CommandLineRunner {
         for (int i = 0; i < 5; i++) {
             Schedules schedules = new Schedules();
             schedules.setUser(user);
-
-            LocalTime startTime = LocalTime.of(9, 0); // 09:00 AM
-            LocalTime endTime = LocalTime.of(10, 0); // 10:00 AM
-
-            schedules.setStartTime(LocalTime.of(12-i,15+i));
-            schedules.setEndTime(LocalTime.of(15+i,12-i));
+            schedules.setStartTime(LocalTime.of(8,0));
+            schedules.setEndTime(LocalTime.of(8,45));
             schedules.setDay(daysArray[i]);
 
             user.getSchedules().add(schedules);
         }
         userService.save(user);
+
+        VacationReq vacationReq = new VacationReq();
+        vacationReq.setUser(user);
+        vacationReq.setStartDate(LocalDate.of(2000,11,1));
+        vacationReq.setEndDate(LocalDate.of(2000,12,1));
+        vacationReq.setAccepted(false);
+        vacationService.save(vacationReq);
+
+
     }
 }

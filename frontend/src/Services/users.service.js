@@ -56,3 +56,28 @@ export const getUserScheduleById = async (id) => {
         throw error;
     }
 }
+export const getUserVacationById = async (id) => {
+    try {
+        const response = await axios.get(`${apiUrl}/${id}/vacation`)
+        return response.data
+    } catch (error) {
+        throw error;
+    }
+}
+export const updateAcceptation = async (id, accept) => {
+    try {
+        const response = await axios.put(
+            `${apiUrl}/${id}/vacation`,
+            accept,
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Błąd przy updateAcceptation:", error.response?.data || error.message);
+        throw error;
+    }
+}
