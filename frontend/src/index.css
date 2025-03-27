@@ -6,6 +6,84 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.schedule-table-wrapper {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.schedule-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  table-layout: fixed;
+  font-size: 0.95rem;
+}
+
+.schedule-table-wrapper {
+  max-height: 100vh; /* 👈 dopasuj do ekranu */
+  overflow-y: auto;
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid #dee2e6;
+  padding: 0;
+  height: 45px;
+  text-align: center;
+  vertical-align: middle;
+}
+.schedule-table th:first-child,
+.schedule-table td:first-child {
+  width: 160px;               /* 👈 było 90px – teraz +20px */
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.schedule-table th:not(:first-child),
+.schedule-table td:not(:first-child) {
+  width: calc((100% - 160px) / 5);
+}
+
+
+/* Usuwanie granic dla sąsiadujących slotów */
+td.no-border-top {
+  border-top: none !important;
+}
+td.no-border-bottom {
+  border-bottom: none !important;
+}
+
+.slot {
+  display: block;
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  background-color: #0d6efd;
+  border-radius: 0;
+}
+
+/* Zaokrąglenie tylko na początku i końcu bloku */
+.slot-top {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.slot-bottom {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.rounded-top {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.rounded-bottom {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -13,3 +91,5 @@ code {
 }
 @tailwind utilities;
 @tailwind utilities;
+
+

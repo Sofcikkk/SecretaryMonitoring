@@ -27,12 +27,10 @@ export const AuthProvider = ({ children }) => {
             if (response.data) {
                 const user = response.data;
                 setIsAuthenticated(true);
-                console.log(user)
-                console.log(user.role)
                 localStorage.setItem("isAuthenticated", "true");
                 localStorage.setItem("userRole", user.role);
                 localStorage.setItem("userName", user.firstName);
-                localStorage.setItem("userId", user.id)
+                localStorage.setItem("userId", user.id);
             }
         } catch (error) {
             console.error("❌ Login failed:", error.response?.data || error);
@@ -42,10 +40,10 @@ export const AuthProvider = ({ children }) => {
 
     const logout = () => {
         setIsAuthenticated(false);
+        localStorage.removeItem("userId");
         localStorage.removeItem("isAuthenticated");
         localStorage.removeItem("userRole");
         localStorage.removeItem("userName");
-        localStorage.removeItem("userId")
     };
 
     return (

@@ -36,9 +36,11 @@ public class MyCommandLineRunner implements CommandLineRunner {
         for (int i = 0; i < 5; i++) {
             Schedules schedules = new Schedules();
             schedules.setUser(user);
-            schedules.setStartTime(LocalTime.of(8,0));
-            schedules.setEndTime(LocalTime.of(8,45));
-            schedules.setDay(daysArray[i]);
+
+            // przykładowe sloty pracy: 9:50 - 11:30
+            schedules.setStartTime(LocalTime.of(9, 50));
+            schedules.setEndTime(LocalTime.of(11, 30));
+            schedules.setDay(daysArray[i]); // MONDAY - FRIDAY
 
             user.getSchedules().add(schedules);
         }
