@@ -48,7 +48,8 @@ public class MyCommandLineRunner implements CommandLineRunner {
         vacationReq.setUser(user);
         vacationReq.setStartDate(LocalDate.of(2000,11,1));
         vacationReq.setEndDate(LocalDate.of(2000,12,1));
-        vacationReq.setAccepted(false);
+        vacationReq.setAccepted(null);
+        vacationReq.getUserFullName();
         vacationService.save(vacationReq);
 
 

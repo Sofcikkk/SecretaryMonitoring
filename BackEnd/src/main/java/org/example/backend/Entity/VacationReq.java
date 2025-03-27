@@ -1,5 +1,6 @@
 package org.example.backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,10 +19,16 @@ public class VacationReq {
 
     private LocalDate startDate;
     private LocalDate endDate;
-    private boolean Accepted;
+    private Boolean Accepted;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
+    @JsonBackReference("user-vacations")
     private User user;
+
+    @Transient
+    public String getUserFullName() {
+        return user.getFirstName() + " " + user.getLastName();
+    }
+
 }

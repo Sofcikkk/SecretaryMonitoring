@@ -7,7 +7,6 @@ import org.example.backend.Service.UserService;
 import org.example.backend.Service.VacationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +19,9 @@ public class UserController {
 
     @Autowired
     private VacationService vacationService;
+
+    @Autowired
+    private VacationService vacationRepository;
 
     @PostMapping
     public User save(@RequestBody User user){return userService.save(user);}
@@ -47,6 +49,9 @@ public class UserController {
     public List<Schedules> getUserSchedules(@PathVariable Long id) {
         return userService.getUserSchedules(id);
     }
+
+
+
     @GetMapping("/{id}/vacation")
     public List<VacationReq> getUserVacation(@PathVariable Long id) {
         return userService.getUserVacationReqs(id);
@@ -58,4 +63,11 @@ public class UserController {
     ) {
         return vacationService.changeAcceptation(id, accept);
     }
+    @PostMapping("/vacation")
+    public VacationReq save(@RequestBody VacationReq vacationReq) {return vacationService.save(vacationReq);}
+    @GetMapping("/vacation/all")
+    public List<VacationReq> getAllVacationRequests() {
+        return vacationRepository.findAll();
+    }
+
 }

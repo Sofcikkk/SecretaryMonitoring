@@ -81,3 +81,15 @@ export const updateAcceptation = async (id, accept) => {
         throw error;
     }
 }
+export const submitVacationRequest = async (request) => {
+    try {
+        const response = await axios.post(`${apiUrl}/vacation`, request);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+export const getAllVacations = async () => {
+    const response = await axios.get(`${apiUrl}/vacation/all`);
+    return response.data;
+};
