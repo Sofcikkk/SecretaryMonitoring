@@ -18,9 +18,15 @@ public class User {
     private String lastName;
     private String password;
     private String email;
+
     @Enumerated(EnumType.STRING)
     private Role role;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Schedules> schedules = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Tasks task;
+
 
 }

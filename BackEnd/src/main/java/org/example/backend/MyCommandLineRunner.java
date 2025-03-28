@@ -1,16 +1,12 @@
 package org.example.backend;
 
-import org.example.backend.Entity.Days;
-import org.example.backend.Entity.Role;
-import org.example.backend.Entity.Schedules;
-import org.example.backend.Entity.User;
+import org.example.backend.Entity.*;
 import org.example.backend.Service.SchedulesService;
+import org.example.backend.Service.TaskService;
 import org.example.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Component
@@ -20,6 +16,8 @@ public class MyCommandLineRunner implements CommandLineRunner {
     private UserService userService;
     @Autowired
     private SchedulesService schedulesService;
+    @Autowired
+    private TaskService taskService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -46,5 +44,12 @@ public class MyCommandLineRunner implements CommandLineRunner {
             user.getSchedules().add(schedules);
         }
         userService.save(user);
+
+        Tasks task = new Tasks();
+        task.setTitle("Task 1");
+        task.setDescription("Task 1");
+        task.setUser(user);
+        task.setCompleted(true);
+        taskService.save(task);
     }
 }
