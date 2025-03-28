@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import UserTableRow from "./UserTableRow";
-import {getUsers, getUserScheduleById} from "../../Services/users.service";
+import {getUsers} from "../../Services/users.service";
 import {UserContext} from "../../context/UserContext";
 import {directorAdmin} from "../../roles"
 import {NavLink, useNavigate} from "react-router-dom";
@@ -29,7 +29,6 @@ export default function UserList() {
 
         fetchData();
     },[]);
-    console.log(getUserScheduleById(1))
 
     return(
         <div className="container mt-4">
