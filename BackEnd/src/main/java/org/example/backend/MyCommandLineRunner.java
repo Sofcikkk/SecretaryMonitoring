@@ -2,6 +2,7 @@ package org.example.backend;
 
 import org.example.backend.Entity.*;
 import org.example.backend.Service.SchedulesService;
+import org.example.backend.Service.TaskService;
 import org.example.backend.Service.UserService;
 import org.example.backend.Service.VacationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class MyCommandLineRunner implements CommandLineRunner {
     private UserService userService;
     @Autowired
     private SchedulesService schedulesService;
+    @Autowired
+    private TaskService taskService;
     @Autowired
     private VacationService vacationService;
 
@@ -55,5 +58,12 @@ public class MyCommandLineRunner implements CommandLineRunner {
         vacationService.save(vacationReq);
 
 
+
+        Tasks task = new Tasks();
+        task.setTitle("Task 1");
+        task.setDescription("Task 1");
+        task.setUser(user);
+        task.setCompleted(true);
+        taskService.save(task);
     }
 }
