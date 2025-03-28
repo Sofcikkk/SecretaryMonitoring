@@ -1,5 +1,6 @@
 package org.example.backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,9 +15,9 @@ public class Tasks {
     private Long id;
     private String title;
     private String description;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
+    @JsonBackReference
     private User user;
     private boolean completed;
 

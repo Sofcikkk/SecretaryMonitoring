@@ -14,8 +14,10 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
+
     @Autowired
     private TaskRepository taskRepository;
+
     @Autowired
     private TaskService taskService;
 
@@ -25,8 +27,8 @@ public class TaskController {
     }
 
     @PutMapping("/{id}")
-    public Tasks updateById(Long id) {
-        return taskService.updateById(id, taskRepository.findById(id).get());
+    public Tasks updateById(@PathVariable Long id, @RequestBody Tasks task) {
+        return taskService.updateById(id, task);
     }
 
     @PostMapping()
@@ -35,14 +37,10 @@ public class TaskController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<Tasks> getTaskByUserId(@PathVariable Long userId) {
-        Optional<Tasks> optionalTask = taskRepository.findByUserId(userId);
+    public ResponseEntity<Tasks> getTaskByUserId(@PathVariable Long id) {
+        Optional<Tasks> optionalTask = taskRepository.findByUserId(id);
 
-        if (optionalTask.isPresent()) {
-            return ResponseEntity.ok(optionalTask.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return optionalTask.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
     @GetMapping("/{id}")
     public Tasks findById(@PathVariable Long id) {

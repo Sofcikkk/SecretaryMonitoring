@@ -18,12 +18,10 @@ import java.util.Optional;
 @Service
 public class TaskImplementation implements TaskService {
     private final TaskRepository taskRepository;
-    private final TaskService taskService;
 
     @Autowired
-    public TaskImplementation(TaskRepository taskRepository, TaskService taskService) {
+    public TaskImplementation(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
-        this.taskService = taskService;
     }
 
     @Override
@@ -71,6 +69,6 @@ public class TaskImplementation implements TaskService {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTask(@PathVariable Long id) {
-        taskService.deleteTask(id);
+        taskRepository.deleteById(id);
     }
 }
