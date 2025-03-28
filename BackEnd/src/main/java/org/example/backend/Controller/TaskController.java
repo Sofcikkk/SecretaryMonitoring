@@ -5,6 +5,7 @@ import org.example.backend.Entity.User;
 import org.example.backend.Repository.TaskRepository;
 import org.example.backend.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,5 +48,10 @@ public class TaskController {
         return taskService.findById(id);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTask(@PathVariable Long id) {
+        taskRepository.deleteById(id);
+    }
 
 }

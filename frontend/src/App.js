@@ -11,45 +11,52 @@ import NewUser from "./Components/crudUsers/NewUser";
 import LoginForm from "./Components/Login";
 import ProtectedRoute from "./ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
-import TasksList from "./Components/TasksList";
 import WorkTime from "./Components/WorkTime";
 import DataAnalysis from "./Components/DataAnalysis";
 import WorkSchedule from "./Components/WorkSchedule";
 import VacationForm from "./Components/VacationForm";
+import UpdateTaskForm from "./Components/crudTasks/UpdateTaskForm";
+import TaskList from "./Components/crudTasks/TaskList";
+import NewTask from "./Components/crudTasks/NewTask";
+import { TaskProvider } from "./context/TaskContext";
 
 function App() {
     return (
         <AuthProvider>
             <Router>
                 <UserListProvider>
-                    <div className="container">
-                        <NavBar />
-                        <hr />
+                    <TaskProvider> {/* <-- przeniesione tutaj */}
+                        <div className="container">
+                            <NavBar />
+                            <hr />
 
-                        <Routes>
-                            {/* Public Routes */}
-                            <Route path="login" element={<LoginForm />} />
+                            <Routes>
+                                {/* Public Routes */}
+                                <Route path="login" element={<LoginForm />} />
 
-                            {/* Protected Routes */}
-                            <Route
-                                path="/"
-                                element={
-                                    <ProtectedRoute>
-                                        <Users />
-                                    </ProtectedRoute>
-                                }
-                            >
-                                <Route path="usersList" element={<UserList />} />
-                                <Route path=":id/edit" element={<UpdateUserForm />} />
-                                <Route path="newUser" element={<NewUser />} />
-                                <Route path="tasksList" element={<TasksList/>} />
-                                <Route path="workTime" element={<WorkTime/>} />
-                                <Route path="dataAnalysis" element={<DataAnalysis/>} />
-                                <Route path="workSchedule" element={<WorkSchedule/>} />
-                                <Route path="vacationForm" element={<VacationForm/>} />
-                            </Route>
-                        </Routes>
-                    </div>
+                                {/* Protected Routes */}
+                                <Route
+                                    path="/"
+                                    element={
+                                        <ProtectedRoute>
+                                            <Users />
+                                        </ProtectedRoute>
+                                    }
+                                >
+                                    <Route path="usersList" element={<UserList />} />
+                                    <Route path=":id/edit" element={<UpdateUserForm />} />
+                                    <Route path="newUser" element={<NewUser />} />
+                                    <Route path="tasksList" element={<TaskList />} />
+                                    <Route path=":id/editTask" element={<UpdateTaskForm />} />
+                                    <Route path="newTask" element={<NewTask />} />
+                                    <Route path="workTime" element={<WorkTime />} />
+                                    <Route path="dataAnalysis" element={<DataAnalysis />} />
+                                    <Route path="workSchedule" element={<WorkSchedule />} />
+                                    <Route path="vacationForm" element={<VacationForm />} />
+                                </Route>
+                            </Routes>
+                        </div>
+                    </TaskProvider>
                 </UserListProvider>
             </Router>
         </AuthProvider>

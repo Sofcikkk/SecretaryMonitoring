@@ -10,7 +10,7 @@ export const UserListProvider = ({ children }) => {
         setUsers(users)
     }
 
-    const addUser = (product) => {
+    const addUser = (user) => {
         setUsers([...users, user]);
     }
 

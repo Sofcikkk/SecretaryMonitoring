@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import UserTableRow from "./UserTableRow";
 import {getUsers, getUserScheduleById} from "../../Services/users.service";
 import {UserContext} from "../../context/UserContext";
-import {directorAdmin, menagerPlus} from "../../roles"
+import {directorAdmin} from "../../roles"
 import {NavLink, useNavigate} from "react-router-dom";
 
 export default function UserList() {

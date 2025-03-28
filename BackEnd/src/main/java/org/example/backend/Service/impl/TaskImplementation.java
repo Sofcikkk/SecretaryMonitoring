@@ -65,10 +65,9 @@ public class TaskImplementation implements TaskService {
             throw new RuntimeException("Nie znaleziono zadania dla użytkownika o id: " + id);
         }
     }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTask(@PathVariable Long id) {
+    @Override
+    public void deleteTask(Long id) {
         taskRepository.deleteById(id);
     }
+
 }
