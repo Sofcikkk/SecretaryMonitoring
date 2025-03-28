@@ -48,7 +48,6 @@ export default function WorkSchedule() {
 
     useEffect(() => {
         const loggedUserId = Number(localStorage.getItem("userId")); // konwersja!
-        console.log(loggedUserId)
         getUsers().then((data) => {
             if (data.length === 0) return;
 
